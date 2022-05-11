@@ -1,26 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="grid-container">
+    <the-header></the-header>
+
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TheHeader from "./components/TheHeader.vue";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: { TheHeader },
+
+  methods: {
+    loadData() {
+      this.$store.dispatch("loadSections");
+      this.$store.dispatch("loadCPs");
+      this.$store.dispatch("loadOneCP");
+    },
+  },
+  created() {
+    this.loadData();
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.grid-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  height: 48rem;
+  border: 1px solid #888888;
 }
+
+/*
+Firebase connection (Schwarzmüller videos)
+where are API requests necessary
+
+*/
 </style>
+
