@@ -2,26 +2,17 @@ import { createStore } from "vuex";
 
 import cpModule from './modules/cps/index.js';
 import sectionModule from './modules/sections/index.js';
+import authModule from './modules/auth/index.js';
 
 const store = createStore({
 
     modules: {
         cherrypicks: cpModule,
-        sections: sectionModule
+        sections: sectionModule,
+        auth: authModule
     },
 
-    state() {
-
-        return{
-            userId:'c3'
-        }
-    },
-    getters: {
-        userId(state) {
-
-            return state.userId
-        }
-    }
-});
+   
+})
 
 export default store;

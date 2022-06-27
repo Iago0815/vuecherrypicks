@@ -13,16 +13,31 @@ export default {
   name: "App",
   components: { TheHeader },
 
+  computed: {
+    didAutoLogout() {
+      return this.$store.getters.didAutoLogout;
+    }
+  },
+
   methods: {
     loadData() {
-      this.$store.dispatch("loadSections");
-      this.$store.dispatch("loadCPs");
-      this.$store.dispatch("loadOneCP");
+   //   this.$store.dispatch("loadSections");
+   //   this.$store.dispatch("loadCPs");
+    //  this.$store.dispatch("loadOneCP");
     },
   },
   created() {
-    this.loadData();
+    this.$store.dispatch('autoLogin');
   },
+
+  watch: {
+    didAutoLogout(curVal,oldValue) {
+      if(curVal && curVal !== oldValue) {
+          this.$router.replace('/signin');
+
+      }
+    }
+  }
 };
 </script>
 

@@ -11,8 +11,7 @@ export default {
             newCP: false,
 
             currentCP: [ 
-              
-              { 
+                 { 
                   id: null,  
                   headline: null,
                   body: null,
@@ -20,7 +19,9 @@ export default {
                   updated: null,
                   newdate:null
                    
-                }],
+                }
+              
+          ],
 
             cherrypicks: [
 

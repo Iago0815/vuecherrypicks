@@ -1,72 +1,34 @@
 <template>
   <div class="cpform-wrapper">
     <div class="form-group">
-      <label class="headline" for="headline"
-        >Headline, <b>Section: {{ getCurrentSection }}</b></label
-      >
+      <label class="headline" for="headline">Headline, <b>Section: {{ getCurrentSection }}</b></label>
 
-      <input
-        v-if="isNewCP"
-        type="headline"
-        class="form-control"
-        id="cp_headline"
-        v-model="headline"
-        ref="forNewHeadline"
-      />
+      <input v-if="isNewCP" type="headline" class="form-control" id="cp_headline" v-model="headline"
+        ref="forNewHeadline" />
 
-      <input
-        v-else
-        type="headline"
-        class="form-control"
-        id="cp_headline"
-        v-model="cpHeadline"
-      />
+      <input v-else type="headline" class="form-control" id="cp_headline" v-model="cpHeadline" />
 
       <label class="labelTextareas">Text</label>
-      <textarea
-        v-if="isNewCP"
-        class="form-control myTextareas"
-        rows="16"
-        v-model="text"
-        ref="forNewText"
-      >
+      <textarea v-if="isNewCP" class="form-control myTextareas" rows="16" v-model="text" ref="forNewText">
       </textarea>
 
-      <textarea
-        v-else
-        class="form-control myTextareas"
-        rows="16"
-        v-model="cpBody"
-      >
+      <textarea v-else class="form-control myTextareas" rows="16" v-model="cpBody"> 
       </textarea>
 
       <div class="bottom-controls">
         <div class="bottom-controls-left">
-          <button
-            v-if="isNewCP"
-            class="btn btn-success update"
-            type="submit"
-            @click="createNewCP"
-          >
+          <button v-if="isNewCP" class="btn btn-success update" type="submit" @click="createNewCP">
             Create
           </button>
 
           <div v-else>
-            <button
-              class="btn btn-success update"
-              type="submit"
-              @click="updateCP"
-            >
+            <button class="btn btn-success update" type="submit" @click="updateCP">
               Update
             </button>
-            <button
-              class="btn btn-danger"
-              type="submit"
-              style="color: #fff"
-              @click="deleteCP"
-            >
+            <button class="btn btn-danger" type="submit" style="color: #fff" @click="deleteCP">
               Delete
             </button>
+           
           </div>
         </div>
         <div v-if="!isNewCP" class="bottom-controls-right">
@@ -128,6 +90,11 @@ export default {
     isNewCP() {
       return this.$store.getters.isNewCP;
     },
+
+    returnToken() {
+
+      return this.$store.getters.token;
+    }
   },
 
   methods: {
@@ -167,8 +134,7 @@ export default {
         myHeadline = this.updated_headline;
       }
 
-      console.log(myHeadline);
-      console.log(myText);
+     
 
       this.$store.dispatch("updateCP", {
         id: this.$store.getters.currentCP.id,

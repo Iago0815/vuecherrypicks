@@ -3,9 +3,11 @@ export default {
 
 async loadSections(context) {
 
-     const userId = context.rootGetters.userId;
+     const userId = context.getters.userId;
+      const token = context.getters.token;
 
-     const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/sections/${userId}.json`)
+
+     const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/sections/${userId}.json?auth=`+token)
 
       const data = await response.json();
 
@@ -53,11 +55,13 @@ async loadSections(context) {
         const userId = context.rootGetters.userId;
       //  const timestamp = (new Date()).getTime();
 
+         const token = context.rootGetters.token;
+
         const newSection = {sectionText: data.value,
 
         }
 
-        const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/sections/${userId}.json`,{method:'POST',
+        const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/sections/${userId}.json?auth=`+token,{method:'POST',
         body:JSON.stringify(newSection)
       });
 
@@ -80,7 +84,9 @@ async loadSections(context) {
         const userId = context.rootGetters.userId;
           const mysection = payload.value;
 
-            const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/cps/${userId}.json?`, {method:'GET',
+           const token = context.rootGetters.token;
+
+            const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/cps/${userId}.json?auth=`+token, {method:'GET',
        
       })
 
@@ -122,7 +128,7 @@ async loadSections(context) {
     else {
 
 
-               await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/sections/${userId}/${mysection}.json`,{method:'DELETE',
+               await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/sections/${userId}/${mysection}.json?auth=`+token,{method:'DELETE',
 
         });
 

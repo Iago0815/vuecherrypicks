@@ -2,9 +2,10 @@ export default {
 
   async loadCPs(context) {
 
-     const userId = context.rootGetters.userId;
+     const userId = context.getters.userId;
+      const token = context.getters.token;
 
-     const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/cps/${userId}.json`)
+     const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/cps/${userId}.json?auth=`+token)
 
       const data = await response.json();
 
@@ -32,14 +33,19 @@ export default {
 
 
     context.commit('setCPs',cps);
+
+    
+
+
   },
 
   async loadOneCP(context) {
 
-     const userId = context.rootGetters.userId;
-     const secId = "-N09gWdyQlV7OsPpEx7t";
+     const userId = context.getters.userId;
+    // const secId = context.getters.getCurrentSection;
+     const token = context.getters.token;
 
-     const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/cps/${userId}.json?`, {method:'GET',
+     const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/cps/${userId}.json?auth=`+token, {method:'GET',
        
       })
 
@@ -67,13 +73,13 @@ export default {
       cps.push(cp)
     }
 
-    console.log(cps);
-
-    var allCPsofSection = []
-
-    allCPsofSection = cps.filter(cp => cp.section_id == secId);
     
-    console.log(allCPsofSection);
+    //CHECK THIS!!!
+    // var allCPsofSection = []
+
+    // allCPsofSection = cps.filter(cp => cp.section_id == secId);
+    
+    // console.log(allCPsofSection);
 
 
   },
@@ -97,6 +103,7 @@ export default {
     async addNewCP(context,payload) {
 
       const userId = context.rootGetters.userId;
+      const token = context.rootGetters.token;
 
       const timestamp = (new Date()).getTime();
       
@@ -111,7 +118,7 @@ export default {
 
       }
 
-      const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/cps/${userId}.json`,{method:'POST',
+      const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/cps/${userId}.json?auth=`+token,{method:'POST',
       
         body:JSON.stringify(newCP)
       });
@@ -132,17 +139,17 @@ export default {
 
     async updateCP(context,{id,updatedHeadline,updatedText}) {
 
-       const userId = context.rootGetters.userId;
-       
+       const userId = context.rootGetters.userId;      
 
       const objIndex = context.state.cherrypicks.findIndex(cp => cp.id == id);
       const uphd = updatedHeadline;
       const uptx = updatedText
+      const token = context.getters.token;
 
       const timestamp = (new Date()).getTime();
 
 
-          const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/cps/${userId}/${id}.json`,{method:'PATCH',
+          const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/cps/${userId}/${id}.json?auth=`+token,{method:'PATCH',
       
         body:JSON.stringify({
             body:uptx,
@@ -175,8 +182,9 @@ export default {
 
        const myid = payload.id;
        const userId = context.rootGetters.userId;
+       const token = context.rootGetters.token;
 
-         const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/cps/${userId}/${myid}.json`,{method:'DELETE',
+         const response = await fetch(`https://vuecherrypicks-default-rtdb.europe-west1.firebasedatabase.app/cps/${userId}/${myid}.json?auth=`+token,{method:'DELETE',
       
        
       });

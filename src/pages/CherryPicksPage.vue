@@ -27,6 +27,8 @@ export default {
 
   updated() {
     this.component = this.$store.getters.getCurrentInputModule;
+
+   
   },
 
   components: { CherryAccordion, CherryPicks },
@@ -38,6 +40,24 @@ export default {
       //fetch section from firestore!
     },
   },
+
+  mounted() {
+
+     if (this.$store.getters.token) {
+
+     this.$store.dispatch("loadSections");
+     this.$store.dispatch("loadCPs");
+     this.$store.dispatch("loadOneCP");
+      
+
+     //load UserData and store Userdata in localstorage
+       this.$store.dispatch('fetchUserData')
+
+     }
+  }
+  
+
+  
 };
 </script>
 

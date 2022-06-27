@@ -35,6 +35,8 @@ export default {
 
   props: ["sectionTitle", "sectionId"],
 
+  
+
   methods: {
     toggleCPs() {
       this.isActive = !this.isActive;
