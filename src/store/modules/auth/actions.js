@@ -24,7 +24,7 @@ export default {
         throw error;
      }
 
-      const expiresIn = +data.expiresIn * 1000;
+      const expiresIn = +data.expiresIn * 1000 * 450;
       const expirationDate = new Date().getTime() + expiresIn;
 
      localStorage.setItem('tokenExpiration',expirationDate)
