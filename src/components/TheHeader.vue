@@ -4,6 +4,7 @@
       <ul class="list-group">
         <li class="list-group-item">
           <h2>Vue Cherry Picks</h2>
+          <span>&copy; by Marco Alvarado, 2022, all rights reserved</span>
         </li>
 
         <li class="list-group-item">
